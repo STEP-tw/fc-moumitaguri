@@ -1,0 +1,20 @@
+.heading{
+  color: orange;
+  border-top: 1px solid black;
+  border-bottom :1px solid black;
+  text-align: center;
+  padding: 10px;
+  padding-left: 400px;
+}
+
+.main{
+  display: flex;
+}
+.flower{
+  padding-top: 10px;
+}
+.menu
+{
+  padding: 300px;
+  padding-left: 10px;
+}
