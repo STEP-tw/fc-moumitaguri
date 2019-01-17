@@ -1,4 +1,6 @@
 const fs = require('fs');
+const Quick = require('./quick');
+const app = new Quick();
 
 const getFileName = function (url) {
   if (url == "/") return "./flower-catalog/index.html";
@@ -11,7 +13,8 @@ const send = function (res, content, statusCode = 200) {
   res.end();
 }
 
-const getDetails = function (path, res) {
+const getDetails = function (req, res) {
+  let path = getFileName(req.url);
   fs.readFile(path, (err, data) => {
     if (err) {
       send(res, "not found", 404);
@@ -21,16 +24,14 @@ const getDetails = function (path, res) {
   })
 }
 
-const logRequest = function (req) {
+const logRequest = function (req, res, next) {
   console.log(req.url, req.method);
+  next();
 }
 
-const app = (req, res) => {
-  logRequest(req);
-  let path = getFileName(req.url);
-  getDetails(path, res);
-};
+app.use(logRequest);
+app.use(getDetails);
 
 // Export a function that can act as a handler
 
-module.exports = app;
+module.exports = app.handleRequest.bind(app);
