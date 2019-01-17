@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const getFileName = function (url) {
   if (url == "/") return "./flower-catalog/index.html";
-  return "." + url;
+  return "./flower-catalog" + url;
 }
 
 const send = function (res, content, statusCode = 200) {
