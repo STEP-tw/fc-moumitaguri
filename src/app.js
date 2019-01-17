@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const getFileName = function (url) {
-  if (url == "/") return "./index.html";
+  if (url == "/") return "./flower-catalog/index.html";
   return "." + url;
 }
 
