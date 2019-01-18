@@ -7,16 +7,15 @@
   padding-left: 400px;
 }
 
-.main{
+.main {
   display: flex;
 }
 
-.flower{
+.flower {
   padding-top: 10px;
 }
 
-.menu
-{
+.menu {
   padding: 300px;
   padding-left: 10px;
 }
@@ -28,5 +27,11 @@
 
 .comment{
   font-size: 20px;
+  -webkit-appearance: none;
   background-color: rgb(219, 210, 210);
+}
+
+.flower_detail {
+  padding: 300px 0px;
+  padding-left: 10px;
 }
