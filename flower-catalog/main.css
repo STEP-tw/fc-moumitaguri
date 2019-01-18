@@ -1,26 +1,17 @@
-.heading{
-  color: orange;
-  border-top: 1px solid black;
-  border-bottom :1px solid black;
-  text-align: center;
-  padding: 10px;
-  padding-left: 400px;
-}
-
 .main {
   display: flex;
 }
 
 .flower {
-  padding-top: 10px;
+  padding: 10px 15px;
 }
 
 .menu {
-  padding: 300px;
+  padding: 200px;
   padding-left: 10px;
 }
 
-.guest_heading{
+.heading{
   text-align: center;
   color: orange;
 }
@@ -32,6 +23,7 @@
 }
 
 .flower_detail {
-  padding: 300px 0px;
+  padding: 200px;
   padding-left: 10px;
+  text-align: justify
 }
