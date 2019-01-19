@@ -11,19 +11,19 @@
   padding-left: 10px;
 }
 
-.heading{
+.heading {
   text-align: center;
   color: orange;
 }
 
-.comment{
+.submit {
   font-size: 20px;
   -webkit-appearance: none;
   background-color: rgb(219, 210, 210);
 }
 
 .flower_detail {
-  padding: 200px;
+  padding: 150px;
   padding-left: 10px;
-  text-align: justify
+  text-align: justify;
 }

@@ -1,22 +1,22 @@
-const fs = require('fs');
-const Quick = require('./quick');
+const fs = require("fs");
+const Quick = require("./quick");
 const app = new Quick();
-const commentsJson = require('../flower-catalog/comments.json');
+const commentsJson = require("../flower-catalog/comments.json");
 
-const getFileName = function (url) {
+const getFileName = function(url) {
   if (url == "/") return "./flower-catalog/index.html";
   return "./flower-catalog" + url;
-}
-const send = function (res, content, statusCode = 200) {
+};
+const send = function(res, content, statusCode = 200) {
   res.statusCode = statusCode;
   res.write(content);
   res.end();
-}
+};
 
 const readBody = (req, res, next) => {
   let content = "";
-  req.on('data', (chunk) => content += chunk);
-  req.on('end', () => {
+  req.on("data", chunk => (content += chunk));
+  req.on("end", () => {
     req.body = content;
     next();
   });
@@ -24,37 +24,41 @@ const readBody = (req, res, next) => {
 
 const readArgs = text => {
   let args = {};
-  const splitKeyValue = pair => pair.split('=');
-  const assignKeyValueToArgs = ([key, value]) => args[key] = value;
-  text.split('&').map(splitKeyValue).forEach(assignKeyValueToArgs);
-  console.log(args);
+  const splitKeyValue = pair => pair.split("=");
+  const assignKeyValueToArgs = ([key, value]) => {
+    args[key] = unescape(unescape(value));
+  };
+  text.split("&").map(splitKeyValue).forEach(assignKeyValueToArgs);
   return args;
-}
+};
 
-const commentsHandler = function (req, res) {
+const commentsHandler = function(req, res) {
   console.log(req.url);
   const comments = req.body;
   let guestComment = readArgs(comments);
   guestComment.date = new Date().toLocaleDateString();
   guestComment.time = new Date().toLocaleTimeString();
-  commentsJson.unshift(JSON.stringify(guestComment));
+  commentsJson.unshift(guestComment);
   let content = JSON.stringify(commentsJson);
-  fs.writeFile('./flower-catalog/comments.json', content, (err) => {
+  fs.writeFile("./flower-catalog/comments.json", content, err => {
     if (err) {
       send(res, "not found", 404);
     }
     guestbookHandler(req, res);
   });
-}
+};
 
-const getCommentDetails = function (commentList) {
-  return commentList.map(x => {
-    x = JSON.parse(x);
-    return `<table><tr><td>${x.date}</td> <td>${x.time}</td> <td>${x.name}</td> <td>${x.comment}</td></tr></table>`;
-  }).join("");
-}
+const getCommentDetails = function(commentList) {
+  return commentList
+    .map(x => {
+      return `<table><tr><td>${x.date}</td> <td>${x.time}</td> <td>${
+        x.name
+      }</td> <td>${x.comment}</td></tr></table>`;
+    })
+    .join("");
+};
 
-const guestbookHandler = function (req, res) {
+const guestbookHandler = function(req, res) {
   let path = getFileName(req.url);
   fs.readFile(path, (err, data) => {
     let commentDetails = getCommentDetails(commentsJson);
@@ -64,9 +68,9 @@ const guestbookHandler = function (req, res) {
     }
     send(res, content, 200);
   });
-}
+};
 
-const getDetails = function (req, res) {
+const getDetails = function(req, res) {
   let path = getFileName(req.url);
   fs.readFile(path, (err, data) => {
     if (err) {
@@ -74,13 +78,13 @@ const getDetails = function (req, res) {
       return;
     }
     send(res, data, 200);
-  })
-}
+  });
+};
 
-const logRequest = function (req, res, next) {
+const logRequest = function(req, res, next) {
   console.log(req.url, req.method);
   next();
-}
+};
 
 app.use(readBody);
 app.use(logRequest);
