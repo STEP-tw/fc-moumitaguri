@@ -1,3 +1,7 @@
+/**
+ * This is the description of the encode function
+ * It encodes the names and comments of the guests in the guestbook
+ */
 const encode = function() {
   let nameBox = document.getElementById("name");
   let commentBox = document.getElementById("comment");
@@ -7,6 +11,10 @@ const encode = function() {
   hiddenCommentBox.value = escape(commentBox.value);
 };
 
+/**
+ * This is the description of the initialize function
+ * This initializes the guestbook page
+ */
 const initialize = function() {
   const submit = document.getElementById("submit");
   submit.onclick = encode;
