@@ -20,4 +20,15 @@ const initialize = function() {
   submit.onclick = encode;
 };
 
+const fetchComments = function() {
+  fetch("/comments")
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(comments) {
+      console.log(comments);
+      document.getElementById("guestComment").innerHTML = comments;
+    });
+};
+
 window.onload = initialize;

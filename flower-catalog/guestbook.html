@@ -6,12 +6,12 @@
     <script src="/guestbook.js"></script>
   </head>
 
-  <body>
+  <body style="padding-left: 20px">
     <h1 class="heading"><a href="/index.html"><<</a>GuestBook</h1>
     <hr />
     <h1>Leave a comment</h1>
     <form action="guestbook.html" method="POST" style="font-size: 25px">
-      <div>Name:<input type="text" name="name" id="name" /></div>
+      <div>Name:<input type="text" name="name" id="name" required /></div>
       <div>
         Comment:
         <textarea
@@ -19,13 +19,18 @@
           name="comment"
           cols="30"
           rows="5"
+          required
         ></textarea>
       </div>
       <input type="hidden" name="name" id="hiddenName" />
       <input type="hidden" name="comment" id="hiddenComment" />
       <input id="submit" class="submit" type="submit" value="Submit" />
-      <hr />
-      <div><p style="font-size:15px">DATE_TIME_NAME_COMMENTS_LIST</p></div>
     </form>
+      <hr />
+      <div>
+      <b>Comments</b><button type="reset" onclick="fetchComments()">&#x21bb </button>
+      <br><br>
+    </div>
+    <div id="guestComment">##COMMENTS##</div>
   </body>
 </html>
